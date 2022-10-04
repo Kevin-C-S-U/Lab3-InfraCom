@@ -11,34 +11,19 @@ public class Servidor {
 	public static final int PUERTO = 3400;
 	
 	public static void main(String[] args) throws IOException {
-		ServerSocket ss = null;
-		boolean continuar = true;
-		System.out.println("Main Server...");
-		try {
-			ss = new ServerSocket(PUERTO);
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		while(continuar) {
+		ServerSocket ss = new ServerSocket(PUERTO);
+		System.out.println(ss);
+		int num =2;
+		int n = 0;
+		SerThread[] thr = new SerThread[num];
+		while(n<num) {
 			Socket socket =ss.accept();
-			try {
-				//Archivo a transmitir
-				File file = new File("data/Entrega1_ProyectoSistEmp.pptx");
-				//Creacion Input
-				FileInputStream fr = new FileInputStream("data/Entrega1_ProyectoSistEmp.pptx");
-				//Creacion Output
-				DataOutputStream data = new DataOutputStream(socket.getOutputStream());
-				
-				//Arreglo de bytes
-				byte b[]=new byte[(int)file.length()];
-				fr.read(b);
-				
-				data.writeInt(b.length);
-				data.write(b);
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
+			SerThread thread = new SerThread(socket, 1);
+			thr[n]=thread;
+			n ++;
+		}
+		for(SerThread i :thr) {
+			i.start();
 		}
 	}
 	
