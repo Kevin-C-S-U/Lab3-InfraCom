@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -17,12 +16,19 @@ public class Cliente {
 		BufferedReader lector = null;
 		
 		try {
-			byte []b = new byte[20000002];
 			socket = new Socket(SERVIDOR,PUERTO);
-			InputStream is = socket.getInputStream();
-			FileOutputStream fr = new FileOutputStream("a.txt");
-			is.read(b,0,b.length);
-			fr.write(b,0,b.length);
+			DataInputStream is = new DataInputStream(socket.getInputStream());
+			
+			int lenData = is.readInt();
+			if (lenData >0) {
+				 byte[] b = new byte[lenData];
+				 is.readFully(b, 0, b.length);
+				 FileOutputStream fr = new FileOutputStream("a.pptx");
+				 fr.write(b,0,b.length);
+				 System.out.println("Se recibio exitosamente");
+				 
+			}
+			
 		}catch (IOException e) {
 			e.printStackTrace();
 			System.exit(-1);

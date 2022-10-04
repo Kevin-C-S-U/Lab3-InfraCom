@@ -1,11 +1,10 @@
-import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 
 public class Servidor {
 	
@@ -24,12 +23,19 @@ public class Servidor {
 		while(continuar) {
 			Socket socket =ss.accept();
 			try {
+				//Archivo a transmitir
+				File file = new File("data/Entrega1_ProyectoSistEmp.pptx");
+				//Creacion Input
 				FileInputStream fr = new FileInputStream("data/Entrega1_ProyectoSistEmp.pptx");
-				byte b[]=new byte[2002];
-				fr.read(b,0,b.length); 
-				OutputStream os = socket.getOutputStream();
-				os.write(b,0,b.length);
+				//Creacion Output
+				DataOutputStream data = new DataOutputStream(socket.getOutputStream());
 				
+				//Arreglo de bytes
+				byte b[]=new byte[(int)file.length()];
+				fr.read(b);
+				
+				data.writeInt(b.length);
+				data.write(b);
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
