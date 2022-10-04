@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Cliente {
 	public static final int PUERTO = 3400;
@@ -14,6 +15,9 @@ public class Cliente {
 		Socket socket = null;
 		PrintWriter escritor = null;
 		BufferedReader lector = null;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("ingrese su numero de cliente");
+		int num =scan.nextInt();
 		
 		try {
 			socket = new Socket(SERVIDOR,PUERTO);
