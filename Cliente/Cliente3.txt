@@ -1,4 +1,6 @@
  
- 04/10/2022 00:58:07
-3400 conectado
-la entrega del archivo fué exitosa conectado
+Fecha: 04/10/2022 01:50:00
+Nombre: Entrega1_ProyectoSistEmp.pptx
+Tamaño: 237555937280B
+Puerto 3400 conectado
+La entrega del archivo fue exitosa 

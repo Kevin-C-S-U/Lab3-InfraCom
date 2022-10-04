@@ -30,7 +30,7 @@ public class Cliente {
 			String fromuser = "ack";
 			escritor.println(fromuser);
 			String fromServer = lector.readLine();
-			System.out.println("numcliente");
+			System.out.println("Numero del cliente en cuestion");
 			System.out.println(fromServer);
 			DataInputStream is = new DataInputStream(socket.getInputStream());
 			
@@ -38,24 +38,31 @@ public class Cliente {
 			if (lenData >0) {
 				 byte[] b = new byte[lenData];
 				 is.readFully(b, 0, b.length);
-				 FileOutputStream fr = new FileOutputStream("Entrega1_ProyectoSistEmp.pptx");
+				 FileOutputStream fr = new FileOutputStream("Cliente"+fromServer+"prueba.pptx");
 				 fr.write(b,0,b.length);
 				 System.out.println("Se recibio exitosamente");
-				 File file = new File("Entrega1_ProyectoSistEmp.pptx");
+				 
+				 //Hashing
+				 File file = new File("Cliente"+fromServer+"prueba.pptx");
 				 String a = file.toString();
 				 System.out.println(a.hashCode());
+				 
+				 //Logs
+				 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		         Date date = new Date();  
+		         String dateee = formatter.format(date);
 				 File filegen = new File("Cliente"+fromServer+".txt");
 				 if (!filegen.exists()) {
 		                filegen.createNewFile();
 		         }
 				 FileWriter fw = new FileWriter(filegen);
 		         BufferedWriter bw = new BufferedWriter(fw);
-		         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		         Date date = new Date();  
-		         String contenido = " \n ";
-		         contenido += ""+formatter.format(date)+"\n";
-		         contenido += ""+socket.getPort()+" conectado\n";
-		         contenido += "la entrega del archivo fué exitosa"+" conectado\n";
+		         String contenido = " \n";
+		         contenido += "Fecha: "+formatter.format(date)+"\n";
+		         contenido += "Nombre: "+file.getName()+"\n";
+		         contenido += "Tamaño: "+file.getTotalSpace()+"B\n";
+		         contenido += "Puerto "+socket.getPort()+" conectado\n";
+		         contenido += "La entrega del archivo fue exitosa"+" \n";
 		         bw.write(contenido);
 		         bw.close();
 				 

@@ -1,4 +1,6 @@
  
- 04/10/2022 00:59:55
-3400 conectado
-la entrega del archivo fué exitosa conectado
+Fecha: 04/10/2022 02:06:47
+Nombre: Cliente1prueba.pptx
+Tamaño: 237555937280B
+Puerto 3400 conectado
+La entrega del archivo fue exitosa 

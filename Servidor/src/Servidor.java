@@ -18,14 +18,14 @@ public class Servidor {
 	
 	public static final String ARC1 = "data/Entrega1_ProyectoSistEmp.pptx";
 	
-	public static final String ARC2 = "data/Entrega1_ProyectoSistEmp.pptx";
+	public static final String ARC2 = "data/cap1.pptx";
 	
 	public static void main(String[] args) throws IOException {
 		ServerSocket ss = new ServerSocket(PUERTO);
 		Scanner scan = new Scanner(System.in);
-		System.out.println("ingrese el num de clientes");
+		System.out.println("Ingrese el num de clientes: ");
 		int num =scan.nextInt();
-		System.out.println("escoja el archivo 1(100MB) o 2(250MB)");
+		System.out.println("Escoja el archivo 1 (100MB o pequeño) o 2 (250MB o grande): " );
 		int a =scan.nextInt();
 		String ar = null;
 		int p = 0;
@@ -66,9 +66,9 @@ public class Servidor {
         for(int i = 0;i<n;i++) {
         	clientes += "cliente "+i+"\n";
         }
-        contenido += "se conectará con los clientes:"+clientes;
-        contenido += "la entrega del archivo fué exitosa";
-        contenido += "el tiempo de trnsferenciaes de "+tiempo+" milisegundos";
+        contenido += "Se conectará con los clientes:"+clientes;
+        contenido += "la entrega del archivo fue exitosa\n";
+        contenido += "El tiempo de trnsferencias de "+tiempo+" milisegundos";
         bw.write(contenido);
         bw.close();
 	}
