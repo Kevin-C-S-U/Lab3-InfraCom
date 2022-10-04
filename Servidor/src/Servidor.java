@@ -34,7 +34,7 @@ public class Servidor {
 		SerThread[] thr = new SerThread[num];
 		while(n<num) {
 			Socket socket =ss.accept();
-			SerThread thread = new SerThread(socket, ar);
+			SerThread thread = new SerThread(socket, ar,n);
 			thr[n]=thread;
 			n ++;
 		}
