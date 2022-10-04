@@ -1,14 +1,16 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Cliente {
 	public static final int PUERTO = 3400;
@@ -42,8 +44,23 @@ public class Cliente {
 				 File file = new File("Entrega1_ProyectoSistEmp.pptx");
 				 String a = file.toString();
 				 System.out.println(a.hashCode());
-				 MessageDigest t = MessageDigest.getInstance("MD5");
+				 File filegen = new File("Cliente"+fromServer+".txt");
+				 if (!filegen.exists()) {
+		                filegen.createNewFile();
+		         }
+				 FileWriter fw = new FileWriter(filegen);
+		         BufferedWriter bw = new BufferedWriter(fw);
+		         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		         Date date = new Date();  
+		         String contenido = " \n ";
+		         contenido += ""+formatter.format(date)+"\n";
+		         contenido += ""+socket.getPort()+" conectado\n";
+		         contenido += "la entrega del archivo fué exitosa"+" conectado\n";
+		         bw.write(contenido);
+		         bw.close();
+				 
 			}
+			
 			
 		}catch (IOException e) {
 			e.printStackTrace();

@@ -1,0 +1,6 @@
+ 
+ arcvodata/Entrega1_ProyectoSistEmp.pptx tamaño100
+se conectará con los clientes:cliente 0
+cliente 1
+cliente 2
+la entrega del archivo fué exitosael tiempo de trnsferenciaes de 0.0 segundos
