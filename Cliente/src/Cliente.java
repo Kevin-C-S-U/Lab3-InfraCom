@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Cliente {
@@ -13,7 +15,7 @@ public class Cliente {
 	
 	public static final String SERVIDOR = "localhost";
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		Socket socket = null;
 		PrintWriter escritor = null;
 		BufferedReader lector = null;
@@ -38,6 +40,9 @@ public class Cliente {
 				 fr.write(b,0,b.length);
 				 System.out.println("Se recibio exitosamente");
 				 File file = new File("Entrega1_ProyectoSistEmp.pptx");
+				 String a = file.toString();
+				 System.out.println(a.hashCode());
+				 MessageDigest t = MessageDigest.getInstance("MD5");
 			}
 			
 		}catch (IOException e) {
