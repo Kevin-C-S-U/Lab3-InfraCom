@@ -20,6 +20,8 @@ public class Servidor {
 	
 	public static final String ARC2 = "data/cap1.pptx";
 	
+	public static double tiempo = 0;
+	
 	public static void main(String[] args) throws IOException {
 		ServerSocket ss = new ServerSocket(PUERTO);
 		Scanner scan = new Scanner(System.in);
@@ -28,13 +30,13 @@ public class Servidor {
 		System.out.println("Escoja el archivo 1 (100MB o pequeño) o 2 (250MB o grande): " );
 		int a =scan.nextInt();
 		String ar = null;
-		int p = 0;
+		long p = 0;
 		if(a==1) {
 			ar = ARC1;
-			p=100;
+			p= (new File(ar)).length();
 		}else if(a==2) {
 			ar = ARC2;
-			p=250;
+			p=(new File(ar)).length();;
 		}else {
 			System.exit(-1);
 		}
@@ -46,12 +48,9 @@ public class Servidor {
 			thr[n]=thread;
 			n ++;
 		}
-		long inicio = System.currentTimeMillis();
 		for(SerThread i :thr) {
 			i.start();
 		}
-		long fin = System.currentTimeMillis();
-		double tiempo = (double) ((fin - inicio));
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
 		File filegen = new File("log"+".txt");
@@ -61,16 +60,20 @@ public class Servidor {
 		FileWriter fw = new FileWriter(filegen);
         BufferedWriter bw = new BufferedWriter(fw);
         String contenido = " \n ";
-        contenido += "arcvo"+ar+" tamaño"+p+"\n";
-        String clientes ="";
+        contenido += "Archivo "+ar+" de tamaño "+p+"B\n";
+        String clientes ="\n";
         for(int i = 0;i<n;i++) {
         	clientes += "cliente "+i+"\n";
         }
         contenido += "Se conectará con los clientes:"+clientes;
-        contenido += "la entrega del archivo fue exitosa\n";
-        contenido += "El tiempo de trnsferencias de "+tiempo+" milisegundos";
+        contenido += "La entrega de los archivos fue exitosa\n";
+        contenido += "El tiempo total de transferencias fue de "+tiempo+" milisegundos";
         bw.write(contenido);
         bw.close();
+	}
+	
+	public static void addTiempo(double tiemp) {
+		Servidor.tiempo = Servidor.tiempo+tiemp;
 	}
 	
 }

@@ -23,6 +23,7 @@ public class SerThread extends Thread {
 	public void run() {
 		try {
 			
+			double inicio = System.currentTimeMillis();
 			PrintWriter escritor = new PrintWriter(socket.getOutputStream(),true);
 			BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String inputline = lector.readLine();
@@ -42,6 +43,11 @@ public class SerThread extends Thread {
 			
 			data.writeInt(b.length);
 			data.write(b);
+			double fin = System.currentTimeMillis();
+			
+			double tiem = fin-inicio;
+			data.writeDouble(tiem);
+			Servidor.addTiempo(tiem);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}

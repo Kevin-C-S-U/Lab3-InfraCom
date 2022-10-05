@@ -1,6 +1,7 @@
  
-Fecha: 04/10/2022 02:06:47
+Fecha: 04/10/2022 22:48:58
 Nombre: Cliente1prueba.pptx
-Tamaño: 237555937280B
+Tamaño: 698027B
 Puerto 3400 conectado
+Tiempo transferencia:10.0 
 La entrega del archivo fue exitosa 
